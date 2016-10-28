@@ -1,8 +1,8 @@
 const React = require('react');
 
-const WeatherMessage = ({temp, location}) => {
+const WeatherMessage = ({temp, location, icon}) => {
     return (
-        <h3 className="text-center">It's {temp} in {location}.</h3>
+        <h4 className="text-center"><img src={icon} alt="icon"/> {temp}°C in {location}.</h4>
     );
 };
 

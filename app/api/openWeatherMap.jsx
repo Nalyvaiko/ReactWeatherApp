@@ -11,10 +11,16 @@ module.exports = {
             if (res.data.cod && res.data.message) {
                 throw new Error(res.data.message);
             } else {
-                return res.data.main.temp;
+                let icon = 'http://openweathermap.org/img/w/' + res.data.weather[0].icon + '.png';
+                let temp = res.data.main.temp;
+
+                return {
+                    temp: temp,
+                    icon: icon
+                };
             }
         }, function(res) {
-            throw new Error(res.data.message);
+            throw new Error('City not found');
         });
     }
 }
