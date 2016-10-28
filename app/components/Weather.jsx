@@ -16,6 +16,8 @@ const Weather = React.createClass({
         let that = this;
 
         this.setState({
+            location: undefined,
+            temp: undefined,
             isLoading: true,
             errorMessage: undefined
         });
@@ -32,6 +34,29 @@ const Weather = React.createClass({
                 errorMessage: e.message
             });
         });
+    },
+
+    componentDidMount: function() {
+        // In Router there is a lot of props - query.location
+        // in URL location can be setted in Example page
+        let location = this.props.location.query.location;
+
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+
+            // clean URL for the start page
+            window.location.hash = '#/';
+        }
+    },
+
+    // for top-bar-right search location Nav.jsx
+    componentWillReceiveProps: function (newProps) {
+        let location = newProps.location.query.location;
+
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '#/';
+        }
     },
 
     render: function () {
